@@ -15,17 +15,17 @@ class FootballRepository(
         cache.query = query
         updatePlayersWithRemoteApi()
         updateTeamsWithTeamsApi()
-        return returnLocalData()
+        return getLocalData()
     }
 
     override suspend fun getMorePlayers(): Result {
         updatePlayersWithRemoteApi()
-        return returnLocalData()
+        return getLocalData()
     }
 
     override suspend fun getMoreTeams(): Result {
         updateTeamsWithTeamsApi()
-        return returnLocalData()
+        return getLocalData()
     }
 
     private suspend fun updatePlayersWithRemoteApi() {
@@ -42,7 +42,7 @@ class FootballRepository(
         }
     }
 
-    private suspend fun returnLocalData() = Result(
+    private suspend fun getLocalData() = Result(
         mapper.mapPlayerResponse(localStorage.getPlayers(cache.query)),
         mapper.mapTeamResponse(localStorage.getTeams(cache.query)),
         cache.getErrors()
