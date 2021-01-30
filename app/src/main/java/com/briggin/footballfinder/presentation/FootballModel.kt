@@ -2,7 +2,7 @@ package com.briggin.footballfinder.presentation
 
 import androidx.annotation.StringRes
 
-sealed class FootballModel(type: ModelType)
+sealed class FootballModel(val type: ModelType)
 
 data class Header(@StringRes val title: Int) : FootballModel(ModelType.Header)
 
@@ -22,9 +22,10 @@ data class Team(
 
 object Loader : FootballModel(ModelType.Loader)
 
-object LoadMorePlayers : FootballModel(ModelType.LoadMorePlayers)
-
-object LoadMoreTeams : FootballModel(ModelType.LoadMoreTeams)
+data class LoadMore(
+    private val loadingType: ModelType,
+    @StringRes val title: Int
+) : FootballModel(loadingType)
 
 enum class ModelType(val id: Int) {
     Header(0),

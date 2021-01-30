@@ -5,7 +5,7 @@ import com.briggin.footballfinder.domain.TeamDomain
 
 interface FootballStorage : FootballApi {
 
-    suspend fun updatePlayers(player: List<PlayerDomain>)
+    suspend fun updatePlayers(players: List<PlayerDomain>)
 
     suspend fun updateTeams(teams: List<TeamDomain>)
 }
