@@ -4,7 +4,7 @@ import com.briggin.footballfinder.domain.ResultError
 import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.atomic.AtomicReference
 
-private const val PAGINATION_SIZE = 10L
+internal const val PAGINATION_SIZE = 10L
 
 class QueryCache {
 
