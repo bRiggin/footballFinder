@@ -1,6 +1,6 @@
 package com.briggin.footballfinder.data
 
-import com.briggin.footballfinder.api.dto.ApiResponse
+import com.briggin.footballfinder.api.retorfit.dto.ApiResponse
 import com.briggin.footballfinder.domain.PlayerDomain
 import com.briggin.footballfinder.domain.TeamDomain
 

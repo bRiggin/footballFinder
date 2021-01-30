@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.api.dto
+package com.briggin.footballfinder.api.retorfit.dto
 
 sealed class ApiResponse<T>
 

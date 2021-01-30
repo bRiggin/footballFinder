@@ -1,7 +1,7 @@
 package com.briggin.footballfinder.data
 
-import com.briggin.footballfinder.api.dto.ApiError
-import com.briggin.footballfinder.api.dto.Success
+import com.briggin.footballfinder.api.retorfit.dto.ApiError
+import com.briggin.footballfinder.api.retorfit.dto.Success
 import com.briggin.footballfinder.domain.*
 import io.mockk.*
 import kotlinx.coroutines.runBlocking

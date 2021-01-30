@@ -1,8 +1,8 @@
 package com.briggin.footballfinder.data
 
-import com.briggin.footballfinder.api.dto.ApiError
-import com.briggin.footballfinder.api.dto.ApiResponse
-import com.briggin.footballfinder.api.dto.Success
+import com.briggin.footballfinder.api.retorfit.dto.ApiError
+import com.briggin.footballfinder.api.retorfit.dto.ApiResponse
+import com.briggin.footballfinder.api.retorfit.dto.Success
 import com.briggin.footballfinder.domain.*
 
 class DataSourceMapper {
@@ -11,7 +11,7 @@ class DataSourceMapper {
 
     fun mapTeamResponse(response: ApiResponse<TeamDomain>) = mapApiResponse(response)
 
-    private fun mapApiResponse(response: ApiResponse<*>) = when (response) {
+    private fun <T> mapApiResponse(response: ApiResponse<T>) = when (response) {
         is Success -> response.items.let {
             if (it.size.rem(PAGINATION_SIZE) == 0L) Partial(it) else Complete(it)
         }
