@@ -1,8 +1,8 @@
 package com.briggin.footballfinder.data
 
+import com.briggin.footballfinder.api.dto.ApiError
 import com.briggin.footballfinder.api.dto.Success
 import com.briggin.footballfinder.domain.*
-import kotlinx.coroutines.*
 
 class FootballRepository(
     private val localStorage: FootballStorage,
@@ -12,7 +12,7 @@ class FootballRepository(
 ) : FootballDataSource {
 
     override suspend fun performSearch(query: String): Result {
-        cache.setCache(query)
+        cache.query = query
         updatePlayersWithRemoteApi()
         updateTeamsWithTeamsApi()
         return returnLocalData()
@@ -29,17 +29,22 @@ class FootballRepository(
     }
 
     private suspend fun updatePlayersWithRemoteApi() {
-        val response = remoteApi.getPlayers(cache.getQuery(), cache.nextPlayersIndex())
-        if (response is Success) localStorage.updatePlayers(response.items)
+        when (val response = remoteApi.getPlayers(cache.query, cache.nextPlayersIndex())) {
+            is Success -> localStorage.updatePlayers(response.items)
+            is ApiError -> cache.cacheError(ResultError.Players)
+        }
     }
 
     private suspend fun updateTeamsWithTeamsApi() {
-        val response = remoteApi.getTeams(cache.getQuery(), cache.nextTeamsIndex())
-        if (response is Success) localStorage.updateTeams(response.items)
+        when (val response = remoteApi.getTeams(cache.query, cache.nextTeamsIndex())) {
+            is Success -> localStorage.updateTeams(response.items)
+            is ApiError -> cache.cacheError(ResultError.Teams)
+        }
     }
 
     private suspend fun returnLocalData() = Result(
-        mapper.mapPlayerResponse(localStorage.getPlayers(cache.getQuery())),
-        mapper.mapTeamResponse(localStorage.getTeams(cache.getQuery()))
+        mapper.mapPlayerResponse(localStorage.getPlayers(cache.query)),
+        mapper.mapTeamResponse(localStorage.getTeams(cache.query)),
+        cache.getErrors()
     )
 }

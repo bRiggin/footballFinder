@@ -7,5 +7,3 @@ data class Complete<T>(private val allDomains: List<T>): FootballDomain<T>(allDo
 data class Partial<T>(private val partialDomains: List<T>): FootballDomain<T>(partialDomains)
 
 class NoDomainsFound<T>: FootballDomain<T>(emptyList())
-
-class DomainError<T>(): FootballDomain<T>(emptyList())
