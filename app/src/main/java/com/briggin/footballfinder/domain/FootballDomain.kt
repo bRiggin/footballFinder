@@ -8,8 +8,4 @@ data class Partial<T>(private val partialDomains: List<T>): FootballDomain<T>(pa
 
 class NoDomainsFound<T>: FootballDomain<T>(emptyList())
 
-data class Error<T>(val type: FootballError): FootballDomain<T>(emptyList())
-
-enum class FootballError {
-    Unknown, Network
-}
+class Error<T>(): FootballDomain<T>(emptyList())

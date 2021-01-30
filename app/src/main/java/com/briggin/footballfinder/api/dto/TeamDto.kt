@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.data
+package com.briggin.footballfinder.api.dto
 
 import com.google.gson.annotations.SerializedName
 
