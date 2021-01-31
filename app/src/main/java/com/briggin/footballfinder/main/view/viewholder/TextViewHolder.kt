@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.view.viewholder
+package com.briggin.footballfinder.main.view.viewholder
 
 import android.view.View
 import androidx.annotation.StringRes

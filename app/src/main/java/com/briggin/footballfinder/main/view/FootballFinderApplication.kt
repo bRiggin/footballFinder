@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.view
+package com.briggin.footballfinder.main.view
 
 import android.app.Application
 import com.briggin.footballfinder.koinModule

@@ -1,9 +1,9 @@
-package com.briggin.footballfinder.view.viewholder
+package com.briggin.footballfinder.main.view.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.presentation.Team
+import com.briggin.footballfinder.main.presentation.Team
 import kotlinx.android.synthetic.main.view_holder_team.view.*
 
 class TeamViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {

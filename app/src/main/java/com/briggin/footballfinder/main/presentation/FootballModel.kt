@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.presentation
+package com.briggin.footballfinder.main.presentation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

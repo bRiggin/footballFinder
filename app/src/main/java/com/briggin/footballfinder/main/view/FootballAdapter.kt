@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.view
+package com.briggin.footballfinder.main.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.presentation.*
-import com.briggin.footballfinder.view.viewholder.*
+import com.briggin.footballfinder.main.presentation.*
+import com.briggin.footballfinder.main.view.viewholder.*
 import java.lang.IllegalArgumentException
 
 class FootballAdapter(

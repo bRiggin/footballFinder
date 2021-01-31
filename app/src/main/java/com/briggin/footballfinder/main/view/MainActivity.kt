@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.view
+package com.briggin.footballfinder.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

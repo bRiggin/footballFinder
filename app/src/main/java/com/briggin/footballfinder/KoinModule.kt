@@ -8,8 +8,8 @@ import com.briggin.footballfinder.api.room.FootballDatabase
 import com.briggin.footballfinder.api.room.RoomService
 import com.briggin.footballfinder.data.*
 import com.briggin.footballfinder.domain.FootballDataSource
-import com.briggin.footballfinder.presentation.FootballViewModel
-import com.briggin.footballfinder.presentation.ModelMapper
+import com.briggin.footballfinder.main.presentation.FootballViewModel
+import com.briggin.footballfinder.main.presentation.ModelMapper
 import com.google.gson.GsonBuilder
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel

@@ -1,10 +1,10 @@
-package com.briggin.footballfinder.view.viewholder
+package com.briggin.footballfinder.main.view.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.presentation.Player
-import com.briggin.footballfinder.view.FootballAdapter
+import com.briggin.footballfinder.main.presentation.Player
+import com.briggin.footballfinder.main.view.FootballAdapter
 import kotlinx.android.synthetic.main.view_holder_player.view.*
 
 class PlayerViewHolder(

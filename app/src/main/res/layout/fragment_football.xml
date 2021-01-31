@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".view.FootballFragment">
+    tools:context=".main.view.FootballFragment">
 
     <EditText
         android:id="@+id/footballEditText"
@@ -13,10 +14,24 @@
         android:inputType="text"
         android:layout_margin="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/footballRecyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/footballRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/favouritesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|end"
+            app:srcCompat="@drawable/ic_liked"/>
+
+    </FrameLayout>
 
 </LinearLayout>

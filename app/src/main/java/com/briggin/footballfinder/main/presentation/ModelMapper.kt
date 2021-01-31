@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.presentation
+package com.briggin.footballfinder.main.presentation
 
 import com.briggin.footballfinder.FlagRes
 import com.briggin.footballfinder.R

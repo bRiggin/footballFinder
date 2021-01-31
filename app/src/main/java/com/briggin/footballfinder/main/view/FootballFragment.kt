@@ -1,15 +1,15 @@
-package com.briggin.footballfinder.view
+package com.briggin.footballfinder.main.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.presentation.FootballViewModel
-import com.briggin.footballfinder.presentation.ModelType
-import com.briggin.footballfinder.presentation.Player
+import com.briggin.footballfinder.favourites.FavouritesFragment
+import com.briggin.footballfinder.main.presentation.FootballViewModel
+import com.briggin.footballfinder.main.presentation.ModelType
+import com.briggin.footballfinder.main.presentation.Player
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_football.*
 import kotlinx.coroutines.CoroutineScope
@@ -24,21 +24,8 @@ class FootballFragment : Fragment(R.layout.fragment_football), FootballAdapter.L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        footballRecyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@FootballFragment.adapter
-        }
-
-        viewModel.state.observe(viewLifecycleOwner, { adapter.update(it) })
-
-        viewModel.error.observe(viewLifecycleOwner, {
-            Snackbar.make(view, resources.getString(it), Snackbar.LENGTH_LONG).show()
-        })
-
-        footballEditText.doAfterTextChanged {
-            CoroutineScope(Dispatchers.Default).launch { viewModel.newSearch(it.toString()) }
-        }
+        initialiseRecyclerView()
+        initialiseListeners(view)
     }
 
     override fun onLoadMoreItems(type: ModelType) {
@@ -52,6 +39,31 @@ class FootballFragment : Fragment(R.layout.fragment_football), FootballAdapter.L
 
     override fun onLikeAction(player: Player) {
         CoroutineScope(Dispatchers.Default).launch { viewModel.onLikeAction(player) }
+    }
+
+    private fun initialiseRecyclerView() {
+        footballRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = this@FootballFragment.adapter
+        }
+    }
+
+    private fun initialiseListeners(view: View) {
+        with(viewModel) {
+            state.observe(viewLifecycleOwner, { adapter.update(it) })
+            error.observe(viewLifecycleOwner, {
+                Snackbar.make(view, resources.getString(it), Snackbar.LENGTH_LONG).show()
+            })
+            footballEditText.doAfterTextChanged {
+                CoroutineScope(Dispatchers.Default).launch { newSearch(it.toString()) }
+            }
+        }
+        favouritesButton.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.fragmentContainer, FavouritesFragment.newInstance())
+                ?.addToBackStack("FavouritesFragment")
+                ?.commit()
+        }
     }
 
     companion object {

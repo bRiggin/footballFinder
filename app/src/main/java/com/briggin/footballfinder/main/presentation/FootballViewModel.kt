@@ -1,4 +1,4 @@
-package com.briggin.footballfinder.presentation
+package com.briggin.footballfinder.main.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
