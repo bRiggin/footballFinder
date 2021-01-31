@@ -9,7 +9,7 @@ class FootballRepository(
     private val remoteApi: FootballApi,
     private val mapper: DataSourceMapper,
     private val cache: QueryCache
-) : FootballDataSource {
+) : FootballDataSource, FavoritesDataSource {
 
     override suspend fun performSearch(query: String): Result {
         cache.query = query
@@ -37,6 +37,14 @@ class FootballRepository(
         localStorage.unlikePlayer(id)
         return getLocalData()
     }
+
+    override suspend fun unlikeFavouritePlayer(id: String): List<PlayerDomain> {
+        localStorage.unlikePlayer(id)
+        return getLikedPlayers()
+    }
+
+    override suspend fun getLikedPlayers(): List<PlayerDomain> =
+        localStorage.getFavouritePlayers()
 
     private suspend fun updatePlayersWithRemoteApi(index: Long) {
         when (val response = remoteApi.getPlayers(cache.query, index)) {

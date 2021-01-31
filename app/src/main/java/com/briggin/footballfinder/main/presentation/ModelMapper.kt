@@ -15,27 +15,15 @@ class ModelMapper {
     private fun Result.playerItems(): List<FootballModel> = when (players) {
         is Complete -> mutableListOf<FootballModel>().apply {
             add(Header(R.string.header_players))
-            addAll(players.domains.map { it.toModel() })
+            addAll(players.domains.map { playerToModel(it) })
         }
         is Partial -> mutableListOf<FootballModel>().apply {
             add(Header(R.string.header_players))
-            addAll(players.domains.map { it.toModel() })
+            addAll(players.domains.map { playerToModel(it) })
             add(LoadMore(ModelType.LoadMorePlayers, R.string.load_more_players))
         }
         is NoDomainsFound -> emptyList()
     }
-
-    private fun PlayerDomain.toModel(): Player = Player(
-        id,
-        StringBuilder().apply {
-            if (firstName.isNotBlank()) append("$firstName ")
-            append(secondName)
-        }.toString(),
-        age?.toString(),
-        club,
-        isFavourite,
-        FlagRes.fromKey(nationality).resID
-    )
 
     private fun Result.teamItems(): List<FootballModel> = when (teams) {
         is Complete -> mutableListOf<FootballModel>().apply {
@@ -56,4 +44,18 @@ class ModelMapper {
         stadium,
         FlagRes.fromKey(nationality).resID
     )
+
+    companion object {
+        fun playerToModel(domain: PlayerDomain): Player = Player(
+            domain.id,
+            StringBuilder().apply {
+                if (domain.firstName.isNotBlank()) append("${domain.firstName} ")
+                append(domain.secondName)
+            }.toString(),
+            domain.age?.toString(),
+            domain.club,
+            domain.isFavourite,
+            FlagRes.fromKey(domain.nationality).resID
+        )
+    }
 }

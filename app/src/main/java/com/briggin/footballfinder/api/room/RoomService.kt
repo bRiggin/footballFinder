@@ -61,6 +61,9 @@ class RoomService(
         return Success(teams)
     }
 
+    override suspend fun getFavouritePlayers(): List<PlayerDomain> =
+        playerDao.getFavouritePlayers().map { it.toDomain() }
+
     override suspend fun likePlayer(id: String) { performLikeAction(id, true) }
 
     override suspend fun unlikePlayer(id: String) { performLikeAction(id, false) }

@@ -25,7 +25,7 @@ class FootballViewModel(
     private val debouncedQuery = queryChannel
         .asFlow()
         .debounce(400)
-        .mapLatest { it }
+        .mapLatest { it.trim() }
         .distinctUntilChanged()
         .flowOn(Dispatchers.Default)
 

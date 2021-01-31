@@ -6,7 +6,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.favourites.FavouritesFragment
+import com.briggin.footballfinder.favourites.view.FavouritesFragment
 import com.briggin.footballfinder.main.presentation.FootballViewModel
 import com.briggin.footballfinder.main.presentation.ModelType
 import com.briggin.footballfinder.main.presentation.Player
@@ -26,6 +26,9 @@ class FootballFragment : Fragment(R.layout.fragment_football), FootballAdapter.L
         super.onViewCreated(view, savedInstanceState)
         initialiseRecyclerView()
         initialiseListeners(view)
+        CoroutineScope(Dispatchers.Default).launch {
+            viewModel.newSearch(footballEditText.text.toString())
+        }
     }
 
     override fun onLoadMoreItems(type: ModelType) {
@@ -67,7 +70,6 @@ class FootballFragment : Fragment(R.layout.fragment_football), FootballAdapter.L
     }
 
     companion object {
-
         fun newInstance() = FootballFragment()
     }
 }

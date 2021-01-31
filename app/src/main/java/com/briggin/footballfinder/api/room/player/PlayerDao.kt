@@ -15,6 +15,9 @@ interface PlayerDao {
     @Query("SELECT * FROM players")
     suspend fun getPlayers(): List<PlayerEntity>
 
+    @Query("SELECT * FROM players WHERE isFavourite")
+    suspend fun getFavouritePlayers(): List<PlayerEntity>
+
     @Query("SELECT * FROM players WHERE id=:id")
     suspend fun getPlayer(id: String): PlayerEntity?
 

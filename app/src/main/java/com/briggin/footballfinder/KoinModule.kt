@@ -7,7 +7,9 @@ import com.briggin.footballfinder.api.retorfit.RetrofitService
 import com.briggin.footballfinder.api.room.FootballDatabase
 import com.briggin.footballfinder.api.room.RoomService
 import com.briggin.footballfinder.data.*
+import com.briggin.footballfinder.domain.FavoritesDataSource
 import com.briggin.footballfinder.domain.FootballDataSource
+import com.briggin.footballfinder.favourites.presentation.FavouritesViewModel
 import com.briggin.footballfinder.main.presentation.FootballViewModel
 import com.briggin.footballfinder.main.presentation.ModelMapper
 import com.google.gson.GsonBuilder
@@ -22,10 +24,13 @@ val koinModule = module {
 
     viewModel { FootballViewModel(get(), get()) }
 
+    viewModel { FavouritesViewModel(get()) }
+
     factory { ModelMapper() }
 
     factory { FootballRepository(get(), get(), get(), get()) }
         .bind(FootballDataSource::class)
+        .bind(FavoritesDataSource::class)
 
     factory { QueryCache() }
 
