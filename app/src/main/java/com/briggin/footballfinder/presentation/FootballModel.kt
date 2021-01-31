@@ -17,7 +17,7 @@ data class Header(
 data class Player(
     val id: String,
     val name: String,
-    val age: Int,
+    val age: String,
     val club: String,
     val isFavourite: Boolean
 ) : FootballModel(

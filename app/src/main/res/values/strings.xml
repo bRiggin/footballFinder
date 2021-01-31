@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">FootballFinder</string>
-    <string name="load_more">Load more stuff</string>
+
+    <string name="header_players">Players</string>
+    <string name="header_teams">Teams</string>
+
+    <string name="load_more_players">More Players</string>
+    <string name="load_more_teams">More Teams</string>
+
+    <string name="player_age">Age %1$s</string>
+    <string name="player_club">Club %1$s</string>
+
+    <string name="club_city">City %1$s</string>
+    <string name="club_stadium">Stadium %1$s</string>
 </resources>

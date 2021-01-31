@@ -8,6 +8,6 @@ import kotlinx.android.synthetic.main.view_holder_header.view.*
 class HeaderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     fun bindView(model: Header) {
-        view.headerTextView.text = view.context.resources.getString(model.title)
+        view.headerTextView.text = view.resources.getString(model.title)
     }
 }
