@@ -19,9 +19,9 @@ class QueryCacheTest {
     fun `WHEN query set THEN expect players index to increment by 10 when requests`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, playersIndexAndIncrement())
-            assertEquals(10, playersIndexAndIncrement())
-            assertEquals(20, playersIndexAndIncrement())
+            assertEquals(0, currentPlayersIndex())
+            assertEquals(10, nextPlayersIndex())
+            assertEquals(20, nextPlayersIndex())
         }
     }
 
@@ -29,13 +29,13 @@ class QueryCacheTest {
     fun `WHEN query set THEN expect players index to be reset`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, playersIndexAndIncrement())
-            assertEquals(10, playersIndexAndIncrement())
-            assertEquals(20, playersIndexAndIncrement())
+            assertEquals(0, currentPlayersIndex())
+            assertEquals(10, nextPlayersIndex())
+            assertEquals(20, nextPlayersIndex())
             query = "second test cached query"
-            assertEquals(0, playersIndexAndIncrement())
-            assertEquals(10, playersIndexAndIncrement())
-            assertEquals(20, playersIndexAndIncrement())
+            assertEquals(0, currentPlayersIndex())
+            assertEquals(10, nextPlayersIndex())
+            assertEquals(20, nextPlayersIndex())
         }
     }
 
@@ -43,9 +43,9 @@ class QueryCacheTest {
     fun `WHEN current player index request THEN expect it to have no effect on value`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, playersIndexAndIncrement())
-            assertEquals(10, playersIndexAndIncrement())
-            assertEquals(20, currentPlayersIndex())
+            assertEquals(0, currentPlayersIndex())
+            assertEquals(10, nextPlayersIndex())
+            assertEquals(20, nextPlayersIndex())
             assertEquals(20, currentPlayersIndex())
             assertEquals(20, currentPlayersIndex())
         }
@@ -55,9 +55,9 @@ class QueryCacheTest {
     fun `WHEN query set THEN expect teams index to increment by 10 when requests`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, playersIndexAndIncrement())
-            assertEquals(10, playersIndexAndIncrement())
-            assertEquals(20, playersIndexAndIncrement())
+            assertEquals(0, currentTeamsIndex())
+            assertEquals(10, nextTeamsIndex())
+            assertEquals(20, nextTeamsIndex())
         }
     }
 
@@ -65,13 +65,13 @@ class QueryCacheTest {
     fun `WHEN query set THEN expect teams index to be reset`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, teamsIndexAndIncrement())
-            assertEquals(10, teamsIndexAndIncrement())
-            assertEquals(20, teamsIndexAndIncrement())
+            assertEquals(0, currentTeamsIndex())
+            assertEquals(10, nextTeamsIndex())
+            assertEquals(20, nextTeamsIndex())
             query = "second test cached query"
-            assertEquals(0, teamsIndexAndIncrement())
-            assertEquals(10, teamsIndexAndIncrement())
-            assertEquals(20, teamsIndexAndIncrement())
+            assertEquals(0, currentTeamsIndex())
+            assertEquals(10, nextTeamsIndex())
+            assertEquals(20, nextTeamsIndex())
         }
     }
 
@@ -79,9 +79,9 @@ class QueryCacheTest {
     fun `WHEN current team index request THEN expect it to have no effect on value`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, teamsIndexAndIncrement())
-            assertEquals(10, teamsIndexAndIncrement())
-            assertEquals(20, currentTeamsIndex())
+            assertEquals(0, currentTeamsIndex())
+            assertEquals(10, nextTeamsIndex())
+            assertEquals(20, nextTeamsIndex())
             assertEquals(20, currentTeamsIndex())
             assertEquals(20, currentTeamsIndex())
         }

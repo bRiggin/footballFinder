@@ -21,10 +21,10 @@ class QueryCache {
             threadSafeQuery.set(value)
         }
 
-    fun playersIndexAndIncrement(): Long = threadSafePlayersIndex.getAndAdd(PAGINATION_SIZE)
+    fun nextPlayersIndex(): Long = threadSafePlayersIndex.addAndGet(PAGINATION_SIZE)
     fun currentPlayersIndex(): Long = threadSafePlayersIndex.get()
 
-    fun teamsIndexAndIncrement(): Long = threadSafeTeamsIndex.getAndAdd(PAGINATION_SIZE)
+    fun nextTeamsIndex(): Long = threadSafeTeamsIndex.addAndGet(PAGINATION_SIZE)
     fun currentTeamsIndex(): Long = threadSafeTeamsIndex.get()
 
     fun cacheError(error: ResultError) {
