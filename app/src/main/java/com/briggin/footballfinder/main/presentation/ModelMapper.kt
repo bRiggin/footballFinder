@@ -2,7 +2,7 @@ package com.briggin.footballfinder.main.presentation
 
 import com.briggin.footballfinder.FlagRes
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.domain.*
+import com.briggin.footballfinder.common.domain.*
 import java.lang.StringBuilder
 
 class ModelMapper {

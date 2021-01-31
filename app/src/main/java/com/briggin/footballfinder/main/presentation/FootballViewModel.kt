@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.domain.FootballDataSource
-import com.briggin.footballfinder.domain.Result
-import com.briggin.footballfinder.domain.ResultError
+import com.briggin.footballfinder.common.domain.FootballDataSource
+import com.briggin.footballfinder.common.domain.Result
+import com.briggin.footballfinder.common.domain.ResultError
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel

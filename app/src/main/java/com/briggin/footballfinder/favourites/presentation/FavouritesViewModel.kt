@@ -3,8 +3,8 @@ package com.briggin.footballfinder.favourites.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.briggin.footballfinder.domain.FavoritesDataSource
-import com.briggin.footballfinder.domain.PlayerDomain
+import com.briggin.footballfinder.common.domain.FavoritesDataSource
+import com.briggin.footballfinder.common.domain.PlayerDomain
 import com.briggin.footballfinder.main.presentation.ModelMapper
 import com.briggin.footballfinder.main.presentation.Player
 import kotlinx.coroutines.CoroutineScope
