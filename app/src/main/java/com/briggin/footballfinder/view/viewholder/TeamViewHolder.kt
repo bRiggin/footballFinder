@@ -13,6 +13,7 @@ class TeamViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
             teamName.text = model.name
             teamCity.text = resources.getString(R.string.club_city, model.city)
             teamStadium.text = resources.getString(R.string.club_stadium, model.stadium)
+            teamImage.setImageResource(model.drawableResID)
         }
     }
 }

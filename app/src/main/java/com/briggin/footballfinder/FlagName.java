@@ -26,7 +26,7 @@ public class FlagName {
                 put("American Samoan", "american_Samoa");
                 put("Andorran", "andorra");
                 put("Angolan", "angola");
-                put("Anguillan", "anguilla");
+                put("Anguillan", "anguilla"); // help
                 put("Antiguan", "antigua_and_barbuda");
                 put("Argentine", "argentina");
                 put("Armenian", "armenia");
