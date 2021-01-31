@@ -22,7 +22,7 @@ class FootballAdapter(
             ModelType.Header ->
                 HeaderViewHolder(inflater.inflate(R.layout.view_holder_header, parent, false))
             ModelType.Player ->
-                PlayerViewHolder(inflater.inflate(R.layout.view_holder_player, parent, false))
+                PlayerViewHolder(inflater.inflate(R.layout.view_holder_player, parent, false), listener)
             ModelType.Team ->
                 TeamViewHolder(inflater.inflate(R.layout.view_holder_team, parent, false))
             ModelType.Loader ->
@@ -44,12 +44,18 @@ class FootballAdapter(
             is NoResults -> (holder as? TextViewHolder)?.bindView(model.title)
             is LoadMore -> {
                 (holder as? TextViewHolder)?.bindView(model.title)
-                holder.itemView.setOnClickListener { listener.loadMoreItems(model.type) }
+                holder.itemView.setOnClickListener { listener.onLoadMoreItems(model.type) }
             }
         }
     }
 
-    interface Listener { fun loadMoreItems(type: ModelType) }
+    interface Listener: LikeActionListener {
+        fun onLoadMoreItems(type: ModelType)
+    }
+
+    interface LikeActionListener {
+        fun onLikeAction(player: Player)
+    }
 }
 
 private class FootballAdapterDiffCallback : DiffUtil.ItemCallback<FootballModel>() {

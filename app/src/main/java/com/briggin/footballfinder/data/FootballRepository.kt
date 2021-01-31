@@ -26,6 +26,15 @@ class FootballRepository(
     override suspend fun getMoreTeams(): Result {
         updateTeamsWithTeamsApi()
         return getLocalData()
+
+    override suspend fun likePlayer(id: String): Result {
+        localStorage.likePlayer(id)
+        return getLocalData(cache.currentPlayersIndex(), cache.currentTeamsIndex())
+    }
+
+    override suspend fun unlikePlayer(id: String): Result {
+        localStorage.unlikePlayer(id)
+        return getLocalData(cache.currentPlayersIndex(), cache.currentTeamsIndex())
     }
 
     private suspend fun updatePlayersWithRemoteApi() {

@@ -64,6 +64,13 @@ class FootballViewModel(
         }
     }
 
+    suspend fun onLikeAction(player: Player) {
+        loadFootballData {
+            if (player.isFavourite) dataSource.unlikePlayer(player.id)
+            else dataSource.likePlayer(player.id)
+        }
+    }
+
     private suspend fun performQuery(query: String) {
         _state.postValue(
             listOf(Header(R.string.header_players), Loading, Header(R.string.header_teams), Loading)

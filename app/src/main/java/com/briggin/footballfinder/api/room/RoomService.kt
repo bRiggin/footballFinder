@@ -19,7 +19,9 @@ class RoomService(
         players.forEach {
             val entity = PlayerEntity.fromDomain(it)
             with(playerDao) {
-                getPlayer(it.id)?.let { updatePlayer(entity) } ?: newPlayer(entity)
+                getPlayer(it.id)?.let { existing ->
+                    updatePlayer(entity.copy(isFavourite = existing.isFavourite))
+                } ?: newPlayer(entity)
             }
         }
     }
@@ -57,5 +59,13 @@ class RoomService(
             .toList()
 
         return Success(teams)
+    }
+
+    override suspend fun likePlayer(id: String) { performLikeAction(id, true) }
+
+    override suspend fun unlikePlayer(id: String) { performLikeAction(id, false) }
+
+    private suspend fun performLikeAction(id: String, isLiked: Boolean) {
+        playerDao.getPlayer(id)?.let { playerDao.updatePlayer(it.copy(isFavourite = isLiked)) }
     }
 }

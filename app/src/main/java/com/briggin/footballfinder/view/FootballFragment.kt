@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.briggin.footballfinder.R
 import com.briggin.footballfinder.presentation.FootballViewModel
 import com.briggin.footballfinder.presentation.ModelType
+import com.briggin.footballfinder.presentation.Player
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_football.*
 import kotlinx.coroutines.CoroutineScope
@@ -40,13 +41,17 @@ class FootballFragment : Fragment(R.layout.fragment_football), FootballAdapter.L
         }
     }
 
-    override fun loadMoreItems(type: ModelType) {
+    override fun onLoadMoreItems(type: ModelType) {
         CoroutineScope(Dispatchers.Default).launch {
             when (type) {
                 ModelType.LoadMorePlayers -> viewModel.loadMorePlayers()
                 ModelType.LoadMoreTeams -> viewModel.loadMoreTeams()
             }
         }
+    }
+
+    override fun onLikeAction(player: Player) {
+        CoroutineScope(Dispatchers.Default).launch { viewModel.onLikeAction(player) }
     }
 
     companion object {
