@@ -19,23 +19,35 @@ class QueryCacheTest {
     fun `WHEN query set THEN expect players index to increment by 10 when requests`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, nextPlayersIndex())
-            assertEquals(10, nextPlayersIndex())
-            assertEquals(20, nextPlayersIndex())
+            assertEquals(0, playersIndexAndIncrement())
+            assertEquals(10, playersIndexAndIncrement())
+            assertEquals(20, playersIndexAndIncrement())
         }
     }
 
     @Test
-    fun `WHEN query set THEN expect players index to be set`() {
+    fun `WHEN query set THEN expect players index to be reset`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, nextPlayersIndex())
-            assertEquals(10, nextPlayersIndex())
-            assertEquals(20, nextPlayersIndex())
+            assertEquals(0, playersIndexAndIncrement())
+            assertEquals(10, playersIndexAndIncrement())
+            assertEquals(20, playersIndexAndIncrement())
             query = "second test cached query"
-            assertEquals(0, nextPlayersIndex())
-            assertEquals(10, nextPlayersIndex())
-            assertEquals(20, nextPlayersIndex())
+            assertEquals(0, playersIndexAndIncrement())
+            assertEquals(10, playersIndexAndIncrement())
+            assertEquals(20, playersIndexAndIncrement())
+        }
+    }
+
+    @Test
+    fun `WHEN current player index request THEN expect it to have no effect on value`() {
+        with(QueryCache()) {
+            query = "test cached query"
+            assertEquals(0, playersIndexAndIncrement())
+            assertEquals(10, playersIndexAndIncrement())
+            assertEquals(20, currentPlayersIndex())
+            assertEquals(20, currentPlayersIndex())
+            assertEquals(20, currentPlayersIndex())
         }
     }
 
@@ -43,23 +55,35 @@ class QueryCacheTest {
     fun `WHEN query set THEN expect teams index to increment by 10 when requests`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, nextPlayersIndex())
-            assertEquals(10, nextPlayersIndex())
-            assertEquals(20, nextPlayersIndex())
+            assertEquals(0, playersIndexAndIncrement())
+            assertEquals(10, playersIndexAndIncrement())
+            assertEquals(20, playersIndexAndIncrement())
         }
     }
 
     @Test
-    fun `WHEN query set THEN expect teams index to be set`() {
+    fun `WHEN query set THEN expect teams index to be reset`() {
         with(QueryCache()) {
             query = "test cached query"
-            assertEquals(0, nextTeamsIndex())
-            assertEquals(10, nextTeamsIndex())
-            assertEquals(20, nextTeamsIndex())
+            assertEquals(0, teamsIndexAndIncrement())
+            assertEquals(10, teamsIndexAndIncrement())
+            assertEquals(20, teamsIndexAndIncrement())
             query = "second test cached query"
-            assertEquals(0, nextTeamsIndex())
-            assertEquals(10, nextTeamsIndex())
-            assertEquals(20, nextTeamsIndex())
+            assertEquals(0, teamsIndexAndIncrement())
+            assertEquals(10, teamsIndexAndIncrement())
+            assertEquals(20, teamsIndexAndIncrement())
+        }
+    }
+
+    @Test
+    fun `WHEN current team index request THEN expect it to have no effect on value`() {
+        with(QueryCache()) {
+            query = "test cached query"
+            assertEquals(0, teamsIndexAndIncrement())
+            assertEquals(10, teamsIndexAndIncrement())
+            assertEquals(20, currentTeamsIndex())
+            assertEquals(20, currentTeamsIndex())
+            assertEquals(20, currentTeamsIndex())
         }
     }
 

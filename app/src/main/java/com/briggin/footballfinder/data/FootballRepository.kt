@@ -29,22 +29,22 @@ class FootballRepository(
     }
 
     private suspend fun updatePlayersWithRemoteApi() {
-        when (val response = remoteApi.getPlayers(cache.query, cache.nextPlayersIndex())) {
+        when (val response = remoteApi.getPlayers(cache.query, cache.currentPlayersIndex())) {
             is Success -> localStorage.updatePlayers(response.items)
             is ApiError -> cache.cacheError(ResultError.Players)
         }
     }
 
     private suspend fun updateTeamsWithTeamsApi() {
-        when (val response = remoteApi.getTeams(cache.query, cache.nextTeamsIndex())) {
+        when (val response = remoteApi.getTeams(cache.query, cache.currentTeamsIndex())) {
             is Success -> localStorage.updateTeams(response.items)
             is ApiError -> cache.cacheError(ResultError.Teams)
         }
     }
 
     private suspend fun getLocalData() = Result(
-        mapper.mapPlayerResponse(localStorage.getPlayers(cache.query)),
-        mapper.mapTeamResponse(localStorage.getTeams(cache.query)),
+        mapper.mapPlayerResponse(localStorage.getPlayers(cache.query, cache.teamsIndexAndIncrement())),
+        mapper.mapTeamResponse(localStorage.getTeams(cache.query, cache.teamsIndexAndIncrement())),
         cache.getErrors()
     )
 }

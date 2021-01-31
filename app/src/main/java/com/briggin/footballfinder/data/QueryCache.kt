@@ -21,9 +21,11 @@ class QueryCache {
             threadSafeQuery.set(value)
         }
 
-    fun nextPlayersIndex(): Long = threadSafePlayersIndex.getAndAdd(PAGINATION_SIZE)
+    fun playersIndexAndIncrement(): Long = threadSafePlayersIndex.getAndAdd(PAGINATION_SIZE)
+    fun currentPlayersIndex(): Long = threadSafePlayersIndex.get()
 
-    fun nextTeamsIndex(): Long = threadSafeTeamsIndex.getAndAdd(PAGINATION_SIZE)
+    fun teamsIndexAndIncrement(): Long = threadSafeTeamsIndex.getAndAdd(PAGINATION_SIZE)
+    fun currentTeamsIndex(): Long = threadSafeTeamsIndex.get()
 
     fun cacheError(error: ResultError) {
         val new = threadSafeErrors.get().toMutableSet().apply { add(error) }

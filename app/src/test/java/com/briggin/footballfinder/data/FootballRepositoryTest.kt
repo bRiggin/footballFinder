@@ -197,11 +197,11 @@ class FootballRepositoryTest {
         }
 
     @Test
-    fun `WHEN more players requested THEN expect next query index included in request`() =
+    fun `WHEN more players requested THEN expect current query index included in request`() =
         runBlocking {
             val testQuery = "test football query"
             val testIndex = 453L
-            every { cache.nextPlayersIndex() } returns testIndex
+            every { cache.currentPlayersIndex() } returns testIndex
             every { cache.query } returns testQuery
 
             dataSource.getMorePlayers()
@@ -215,7 +215,7 @@ class FootballRepositoryTest {
             val testQuery = "test football query"
             val testIndex = 453L
             val testResponse = listOf<PlayerDomain>(mockk(), mockk(), mockk())
-            every { cache.nextPlayersIndex() } returns testIndex
+            every { cache.currentPlayersIndex() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getPlayers(testQuery, testIndex) } returns Success(testResponse)
 
@@ -229,7 +229,7 @@ class FootballRepositoryTest {
         runBlocking {
             val testQuery = "test football query"
             val testIndex = 453L
-            every { cache.nextPlayersIndex() } returns testIndex
+            every { cache.playersIndexAndIncrement() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getTeams(testQuery) } returns ApiError()
 
@@ -245,7 +245,7 @@ class FootballRepositoryTest {
             val testIndex = 453L
             val testResponse = Success(listOf<PlayerDomain>(mockk(), mockk(), mockk()))
             val testDomain = Partial<PlayerDomain>(emptyList())
-            every { cache.nextPlayersIndex() } returns testIndex
+            every { cache.playersIndexAndIncrement() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getPlayers(testQuery) } returns Success(emptyList())
             coEvery { localStorage.getPlayers(testQuery) } returns testResponse
@@ -261,7 +261,7 @@ class FootballRepositoryTest {
             val testIndex = 453L
             val testResponse = Success(listOf<PlayerDomain>(mockk(), mockk(), mockk()))
             val testDomain = NoDomainsFound<PlayerDomain>()
-            every { cache.nextPlayersIndex() } returns testIndex
+            every { cache.playersIndexAndIncrement() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getPlayers(testQuery) } returns ApiError()
             coEvery { localStorage.getPlayers(testQuery) } returns testResponse
@@ -273,11 +273,11 @@ class FootballRepositoryTest {
 
 
     @Test
-    fun `WHEN more teams requested THEN expect next query index included in request`() =
+    fun `WHEN more teams requested THEN expect current query index included in request`() =
         runBlocking {
             val testQuery = "test football query"
             val testIndex = 453L
-            every { cache.nextTeamsIndex() } returns testIndex
+            every { cache.currentTeamsIndex() } returns testIndex
             every { cache.query } returns testQuery
 
             dataSource.getMoreTeams()
@@ -291,7 +291,7 @@ class FootballRepositoryTest {
             val testQuery = "test football query"
             val testIndex = 453L
             val testResponse = listOf<TeamDomain>(mockk(), mockk(), mockk())
-            every { cache.nextTeamsIndex() } returns testIndex
+            every { cache.currentTeamsIndex() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getTeams(testQuery, testIndex) } returns Success(testResponse)
 
@@ -305,7 +305,7 @@ class FootballRepositoryTest {
         runBlocking {
             val testQuery = "test football query"
             val testIndex = 453L
-            every { cache.nextTeamsIndex() } returns testIndex
+            every { cache.teamsIndexAndIncrement() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getTeams(testQuery) } returns ApiError()
 
@@ -321,10 +321,10 @@ class FootballRepositoryTest {
             val testIndex = 453L
             val testResponse = Success(listOf<TeamDomain>(mockk(), mockk(), mockk()))
             val testDomain = Partial<TeamDomain>(emptyList())
-            every { cache.nextTeamsIndex() } returns testIndex
+            every { cache.teamsIndexAndIncrement() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getTeams(testQuery) } returns Success(emptyList())
-            coEvery { localStorage.getTeams(testQuery) } returns testResponse
+            coEvery { localStorage.getTeams(testQuery, testIndex) } returns testResponse
             every { mapper.mapTeamResponse(testResponse) } returns testDomain
 
             assertEquals(testDomain, dataSource.getMoreTeams().teams)
@@ -337,10 +337,10 @@ class FootballRepositoryTest {
             val testIndex = 453L
             val testResponse = Success(listOf<TeamDomain>(mockk(), mockk(), mockk()))
             val testDomain = NoDomainsFound<TeamDomain>()
-            every { cache.nextTeamsIndex() } returns testIndex
+            every { cache.teamsIndexAndIncrement() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getTeams(testQuery) } returns ApiError()
-            coEvery { localStorage.getTeams(testQuery) } returns testResponse
+            coEvery { localStorage.getTeams(testQuery, testIndex) } returns testResponse
             every { mapper.mapTeamResponse(testResponse) } returns testDomain
 
             assertEquals(testDomain, dataSource.getMoreTeams().teams)
