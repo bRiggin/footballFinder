@@ -245,7 +245,7 @@ class FootballRepositoryTest {
             val testIndex = 453L
             val testResponse = Success(listOf<PlayerDomain>(mockk(), mockk(), mockk()))
             val testDomain = Partial<PlayerDomain>(emptyList())
-            every { cache.playersIndexAndIncrement() } returns testIndex
+            every { cache.currentPlayersIndex() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getPlayers(testQuery) } returns Success(emptyList())
             coEvery { localStorage.getPlayers(testQuery) } returns testResponse
@@ -261,7 +261,7 @@ class FootballRepositoryTest {
             val testIndex = 453L
             val testResponse = Success(listOf<PlayerDomain>(mockk(), mockk(), mockk()))
             val testDomain = NoDomainsFound<PlayerDomain>()
-            every { cache.playersIndexAndIncrement() } returns testIndex
+            every { cache.currentPlayersIndex() } returns testIndex
             every { cache.query } returns testQuery
             coEvery { remoteApi.getPlayers(testQuery) } returns ApiError()
             coEvery { localStorage.getPlayers(testQuery) } returns testResponse

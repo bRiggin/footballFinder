@@ -43,7 +43,7 @@ class FootballRepository(
     }
 
     private suspend fun getLocalData() = Result(
-        mapper.mapPlayerResponse(localStorage.getPlayers(cache.query, cache.teamsIndexAndIncrement())),
+        mapper.mapPlayerResponse(localStorage.getPlayers(cache.query, cache.playersIndexAndIncrement())),
         mapper.mapTeamResponse(localStorage.getTeams(cache.query, cache.teamsIndexAndIncrement())),
         cache.getErrors()
     )
