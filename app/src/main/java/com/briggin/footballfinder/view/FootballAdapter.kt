@@ -10,12 +10,11 @@ import com.briggin.footballfinder.presentation.*
 import com.briggin.footballfinder.view.viewholder.*
 import java.lang.IllegalArgumentException
 
-class FootballAdapter() :
-    ListAdapter<FootballModel, RecyclerView.ViewHolder>(FootballAdapterDiffCallback()) {
+class FootballAdapter(
+    private val listener: Listener
+) : ListAdapter<FootballModel, RecyclerView.ViewHolder>(FootballAdapterDiffCallback()) {
 
-    fun update(models: List<FootballModel>) {
-        submitList(models)
-    }
+    fun update(models: List<FootballModel>) { submitList(models) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,15 +33,22 @@ class FootballAdapter() :
         }
     }
 
-    override fun getItemViewType(position: Int): Int = currentList[position].type.id
+    override fun getItemViewType(position: Int): Int =
+        currentList[position].type.id
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(val model = currentList[position] as FootballModel) {
             is Header -> (holder as? HeaderViewHolder)?.bindView(model)
             is Player -> (holder as? PlayerViewHolder)?.bindView(model)
             is Team -> (holder as? TeamViewHolder)?.bindView(model)
+            is LoadMore -> {
+                (holder as? LoadMoreViewHolder)?.bindView(model)
+                holder.itemView.setOnClickListener { listener.loadMoreItems(model.type) }
+            }
         }
     }
+
+    interface Listener { fun loadMoreItems(type: ModelType) }
 }
 
 private class FootballAdapterDiffCallback : DiffUtil.ItemCallback<FootballModel>() {
