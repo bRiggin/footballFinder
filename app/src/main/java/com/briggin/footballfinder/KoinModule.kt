@@ -1,5 +1,6 @@
 package com.briggin.footballfinder
 
+import com.briggin.footballfinder.api.retorfit.BASE_URL
 import com.briggin.footballfinder.api.retorfit.DomainMapper
 import com.briggin.footballfinder.api.retorfit.FootballClient
 import com.briggin.footballfinder.api.retorfit.RetrofitService
@@ -42,7 +43,7 @@ val koinModule = module {
 
     factory {
         Retrofit.Builder()
-            .baseUrl("http://trials.mtcmobile.co.uk/api/football/1.0/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
             .create(FootballClient::class.java)
