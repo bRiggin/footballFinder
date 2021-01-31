@@ -27,8 +27,8 @@ class FootballAdapter(
                 TeamViewHolder(inflater.inflate(R.layout.view_holder_team, parent, false))
             ModelType.Loader ->
                 LoaderViewHolder(inflater.inflate(R.layout.view_holder_loader, parent, false))
-            ModelType.LoadMorePlayers, ModelType.LoadMoreTeams ->
-                LoadMoreViewHolder(inflater.inflate(R.layout.view_holder_load_more, parent, false))
+            ModelType.LoadMorePlayers, ModelType.LoadMoreTeams, ModelType.NoResultsFound ->
+                TextViewHolder(inflater.inflate(R.layout.view_holder_load_more, parent, false))
             null -> throw IllegalArgumentException("FootballAdapter can't create ViewHolder for unknown view type")
         }
     }
@@ -41,8 +41,9 @@ class FootballAdapter(
             is Header -> (holder as? HeaderViewHolder)?.bindView(model)
             is Player -> (holder as? PlayerViewHolder)?.bindView(model)
             is Team -> (holder as? TeamViewHolder)?.bindView(model)
+            is NoResults -> (holder as? TextViewHolder)?.bindView(model.title)
             is LoadMore -> {
-                (holder as? LoadMoreViewHolder)?.bindView(model)
+                (holder as? TextViewHolder)?.bindView(model.title)
                 holder.itemView.setOnClickListener { listener.loadMoreItems(model.type) }
             }
         }

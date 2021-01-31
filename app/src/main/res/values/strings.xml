@@ -7,6 +7,8 @@
     <string name="load_more_players">More Players</string>
     <string name="load_more_teams">More Teams</string>
 
+    <string name="no_results_found">No Results Found</string>
+
     <string name="player_age">Age %1$s</string>
     <string name="player_club">Club %1$s</string>
 

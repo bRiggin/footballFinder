@@ -6,8 +6,10 @@ import java.lang.StringBuilder
 
 class ModelMapper {
 
-    fun mapToModels(domain: Result): List<FootballModel> =
-        domain.playerItems() + domain.teamItems()
+    fun mapToModels(domain: Result): List<FootballModel> {
+        val models = domain.playerItems() + domain.teamItems()
+        return if (models.isEmpty()) listOf(NoResults()) else models
+    }
 
     private fun Result.playerItems(): List<FootballModel> = when (players) {
         is Complete -> mutableListOf<FootballModel>().apply {
