@@ -8,9 +8,12 @@ import com.briggin.footballfinder.api.room.team.TeamEntity
 
 @Dao
 interface PlayerDao {
-
-    @Query("SELECT * FROM players WHERE firstName LIKE :query OR secondName LIKE :query LIMIT :limit")
-    suspend fun getPlayers(query: String, limit: Long): List<PlayerEntity>
+    /**
+     * Original query that was found to be problematic
+     * SELECT * FROM players WHERE firstName LIKE :query OR secondName LIKE :query LIMIT :limit
+     */
+    @Query("SELECT * FROM players")
+    suspend fun getPlayers(): List<PlayerEntity>
 
     @Query("SELECT * FROM players WHERE id=:id")
     suspend fun getPlayer(id: String): PlayerEntity?

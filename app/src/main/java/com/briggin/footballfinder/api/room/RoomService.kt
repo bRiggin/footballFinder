@@ -36,14 +36,26 @@ class RoomService(
     override suspend fun getPlayers(query: String, offset: Long): ApiResponse<PlayerDomain> {
         if (query.isBlank()) return Success(emptyList())
 
-        val players = playerDao.getPlayers(query, offset + 10L).map { it.toDomain() }
-        return Success(players)
+        val domains = playerDao.getPlayers()
+            .asSequence()
+            .filter { it.firstName.contains(query, true) || it.secondName.contains(query, true) }
+            .take((offset + 10L).toInt())
+            .map { it.toDomain() }
+            .toList()
+
+        return Success(domains)
     }
 
     override suspend fun getTeams(query: String, offset: Long): ApiResponse<TeamDomain> {
         if (query.isBlank()) return Success(emptyList())
 
-        val teams = teamsDao.getTeams(query, offset + 10L).map { it.toDomain() }
+        val teams = teamsDao.getTeams()
+            .asSequence()
+            .filter { it.name.contains(query, true) }
+            .take((offset + 10L).toInt())
+            .map { it.toDomain() }
+            .toList()
+
         return Success(teams)
     }
 }

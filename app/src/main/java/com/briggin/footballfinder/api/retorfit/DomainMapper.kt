@@ -7,16 +7,14 @@ import com.briggin.footballfinder.domain.TeamDomain
 
 class DomainMapper {
 
-    fun mapPlayer(player: PlayerDto) = player.playerAge.toIntOrNull()?.let {
-        PlayerDomain(
-            player.playerID,
-            player.playerFirstName,
-            player.playerSecondName,
-            player.playerNationality,
-            it,
-            player.playerNationality
-        )
-    }
+    fun mapPlayer(player: PlayerDto) = PlayerDomain(
+        player.playerID,
+        player.playerFirstName,
+        player.playerSecondName,
+        player.playerNationality,
+        player.playerAge.toIntOrNull(),
+        player.playerClub
+    )
 
     fun mapTeam(team: TeamDto) = TeamDomain(
         team.teamID,

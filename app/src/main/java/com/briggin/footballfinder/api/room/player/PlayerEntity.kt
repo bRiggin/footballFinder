@@ -16,7 +16,7 @@ data class PlayerEntity(
     @ColumnInfo
     val nationality: String,
     @ColumnInfo
-    val age: Int,
+    val age: Int?,
     @ColumnInfo
     val club: String,
     @ColumnInfo

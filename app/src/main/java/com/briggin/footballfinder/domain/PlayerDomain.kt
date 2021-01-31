@@ -5,7 +5,7 @@ data class PlayerDomain(
     val firstName: String,
     val secondName: String,
     val nationality: String,
-    val age: Int,
+    val age: Int?,
     val club: String,
     val isFavourite: Boolean = false
 )

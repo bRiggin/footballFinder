@@ -30,7 +30,7 @@ class ModelMapper {
             if (firstName.isNotBlank()) append("$firstName ")
             append(secondName)
         }.toString(),
-        age.toString(),
+        age?.toString(),
         club,
         isFavourite
     )
