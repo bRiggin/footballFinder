@@ -13,7 +13,11 @@ class DataSourceMapper {
 
     private fun <T> mapApiResponse(response: ApiResponse<T>) = when (response) {
         is Success -> response.items.let {
-            if (it.size.rem(PAGINATION_SIZE) == 0L) Partial(it) else Complete(it)
+            when {
+                it.isEmpty() -> NoDomainsFound()
+                it.size.rem(PAGINATION_SIZE) == 0L -> Partial(it)
+                else -> Complete(it)
+            }
         }
         is ApiError -> NoDomainsFound()
     }

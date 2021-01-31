@@ -28,7 +28,7 @@ class FootballAdapter(
             ModelType.Loader ->
                 LoaderViewHolder(inflater.inflate(R.layout.view_holder_loader, parent, false))
             ModelType.LoadMorePlayers, ModelType.LoadMoreTeams, ModelType.NoResultsFound ->
-                TextViewHolder(inflater.inflate(R.layout.view_holder_load_more, parent, false))
+                TextViewHolder(inflater.inflate(R.layout.view_holder_text, parent, false))
             null -> throw IllegalArgumentException("FootballAdapter can't create ViewHolder for unknown view type")
         }
     }

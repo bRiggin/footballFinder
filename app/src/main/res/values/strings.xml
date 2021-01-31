@@ -14,4 +14,8 @@
 
     <string name="club_city">City %1$s</string>
     <string name="club_stadium">Stadium %1$s</string>
+
+    <string name="error_both">Network error occurred retrieving teams and players info</string>
+    <string name="error_teams">Network error occurred retrieving teams info</string>
+    <string name="error_players">Network error occurred retrieving players info</string>
 </resources>

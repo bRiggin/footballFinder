@@ -1,5 +1,6 @@
 package com.briggin.footballfinder.presentation
 
+import com.briggin.footballfinder.FlagRes
 import com.briggin.footballfinder.R
 import com.briggin.footballfinder.domain.*
 import java.lang.StringBuilder
@@ -32,7 +33,8 @@ class ModelMapper {
         }.toString(),
         age?.toString(),
         club,
-        isFavourite
+        isFavourite,
+        FlagRes.fromKey(nationality).resID
     )
 
     private fun Result.teamItems(): List<FootballModel> = when (teams) {
@@ -48,5 +50,10 @@ class ModelMapper {
         is NoDomainsFound -> emptyList()
     }
 
-    private fun TeamDomain.toModel(): Team = Team(name, city, stadium)
+    private fun TeamDomain.toModel(): Team = Team(
+        name,
+        city,
+        stadium,
+        FlagRes.fromKey(nationality).resID
+    )
 }

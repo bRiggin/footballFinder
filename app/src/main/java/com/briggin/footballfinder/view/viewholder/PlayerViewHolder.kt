@@ -11,8 +11,9 @@ class PlayerViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun bindView(model: Player) {
         with(view) {
             playerName.text = model.name
-            playerAge.text = resources.getString(R.string.player_age, model.age)
+            playerAge.text = model.age?.let { resources.getString(R.string.player_age, it) } ?: "??"
             playerClub.text = resources.getString(R.string.player_club, model.club)
+            playerImage.setImageResource(model.drawableResID)
         }
     }
 }

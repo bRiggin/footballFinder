@@ -1,6 +1,6 @@
 package com.briggin.footballfinder.domain
 
-sealed class FootballDomain<T>(domains: List<T>)
+sealed class FootballDomain<T>(val domains: List<T>)
 
 data class Complete<T>(private val allDomains: List<T>): FootballDomain<T>(allDomains)
 

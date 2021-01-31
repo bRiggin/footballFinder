@@ -1,5 +1,6 @@
 package com.briggin.footballfinder.presentation
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.briggin.footballfinder.R
 
@@ -20,7 +21,8 @@ data class Player(
     val name: String,
     val age: String?,
     val club: String,
-    val isFavourite: Boolean
+    val isFavourite: Boolean,
+    @DrawableRes val drawableResID: Int,
 ) : FootballModel(
     ModelType.Player,
     { other -> other is Player && other.id == id }
@@ -29,7 +31,8 @@ data class Player(
 data class Team(
     val name: String,
     val city: String,
-    val stadium: String
+    val stadium: String,
+    @DrawableRes val drawableResID: Int,
 ) : FootballModel(
     ModelType.Team,
     { other -> other is Team && other.name == name }
