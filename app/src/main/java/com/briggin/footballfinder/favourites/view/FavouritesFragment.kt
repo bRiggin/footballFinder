@@ -3,7 +3,6 @@ package com.briggin.footballfinder.favourites.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.briggin.footballfinder.R
 import com.briggin.footballfinder.favourites.presentation.FavouritesViewModel
@@ -16,7 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FavouritesFragment : Fragment(R.layout.fragment_favourites), FootballAdapter.LikeActionListener {
+class FavouritesFragment : Fragment(R.layout.fragment_favourites),
+    FootballAdapter.LikeActionListener {
 
     private val adapter: FavouritesAdapter = FavouritesAdapter(this)
     private val viewModel: FavouritesViewModel by viewModel()

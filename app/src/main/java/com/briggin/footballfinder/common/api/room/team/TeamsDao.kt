@@ -1,6 +1,9 @@
 package com.briggin.footballfinder.common.api.room.team
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface TeamsDao {

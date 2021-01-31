@@ -1,8 +1,9 @@
-package com.briggin.footballfinder.main.view
+package com.briggin.footballfinder.common.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.briggin.footballfinder.R
+import com.briggin.footballfinder.main.view.FootballFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.view_holder_player.view.*
 class PlayerViewHolder(
     private val view: View,
     private val listener: FootballAdapter.LikeActionListener
-    ) : RecyclerView.ViewHolder(view) {
+) : RecyclerView.ViewHolder(view) {
 
     fun bindView(model: Player) {
         with(view) {

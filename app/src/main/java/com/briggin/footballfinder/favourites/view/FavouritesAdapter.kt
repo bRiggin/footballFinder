@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.briggin.footballfinder.R
-import com.briggin.footballfinder.main.presentation.*
+import com.briggin.footballfinder.main.presentation.Player
 import com.briggin.footballfinder.main.view.FootballAdapter
-import com.briggin.footballfinder.main.view.viewholder.*
+import com.briggin.footballfinder.main.view.viewholder.PlayerViewHolder
 
 class FavouritesAdapter(
     private val listener: FootballAdapter.LikeActionListener
 ) : ListAdapter<Player, PlayerViewHolder>(FavouritesAdapterDiffCallback()) {
 
-    fun update(players: List<Player>){
+    fun update(players: List<Player>) {
         submitList(players)
     }
 

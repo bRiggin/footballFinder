@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class FavouritesViewModel(
     private val dataSource: FavoritesDataSource
-): ViewModel() {
+) : ViewModel() {
 
     private val _state: MutableLiveData<List<Player>> = MutableLiveData()
     val state: LiveData<List<Player>> = _state

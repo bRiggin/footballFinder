@@ -8,17 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.briggin.footballfinder.R
 import com.briggin.footballfinder.main.presentation.*
 import com.briggin.footballfinder.main.view.viewholder.*
-import java.lang.IllegalArgumentException
 
 class FootballAdapter(
     private val listener: Listener
 ) : ListAdapter<FootballModel, RecyclerView.ViewHolder>(FootballAdapterDiffCallback()) {
 
-    fun update(models: List<FootballModel>) { submitList(models) }
+    fun update(models: List<FootballModel>) {
+        submitList(models)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when(ModelType.fromID(viewType)){
+        return when (ModelType.fromID(viewType)) {
             ModelType.Header ->
                 HeaderViewHolder(inflater.inflate(R.layout.view_holder_header, parent, false))
             ModelType.Player ->
@@ -37,7 +38,7 @@ class FootballAdapter(
         currentList[position].type.id
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(val model = currentList[position] as FootballModel) {
+        when (val model = currentList[position] as FootballModel) {
             is Header -> (holder as? HeaderViewHolder)?.bindView(model)
             is Player -> (holder as? PlayerViewHolder)?.bindView(model)
             is Team -> (holder as? TeamViewHolder)?.bindView(model)
@@ -49,7 +50,7 @@ class FootballAdapter(
         }
     }
 
-    interface Listener: LikeActionListener {
+    interface Listener : LikeActionListener {
         fun onLoadMoreItems(type: ModelType)
     }
 

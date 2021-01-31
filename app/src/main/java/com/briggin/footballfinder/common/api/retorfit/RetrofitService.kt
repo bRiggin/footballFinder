@@ -1,10 +1,12 @@
 package com.briggin.footballfinder.common.api.retorfit
 
-import com.briggin.footballfinder.common.api.retorfit.dto.*
+import com.briggin.footballfinder.common.api.retorfit.dto.ApiError
+import com.briggin.footballfinder.common.api.retorfit.dto.ApiResponse
+import com.briggin.footballfinder.common.api.retorfit.dto.FootballRequestBody
+import com.briggin.footballfinder.common.api.retorfit.dto.Success
 import com.briggin.footballfinder.common.data.FootballApi
 import com.briggin.footballfinder.common.domain.PlayerDomain
 import com.briggin.footballfinder.common.domain.TeamDomain
-import java.lang.Exception
 
 private const val SEARCH_TYPE_PLAYERS = "players"
 private const val SEARCH_TYPE_TEAMS = "teams"

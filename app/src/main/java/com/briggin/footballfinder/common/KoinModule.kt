@@ -1,4 +1,4 @@
-package com.briggin.footballfinder
+package com.briggin.footballfinder.common
 
 import com.briggin.footballfinder.common.api.retorfit.BASE_URL
 import com.briggin.footballfinder.common.api.retorfit.DomainMapper
